@@ -1,0 +1,19 @@
+version: '3'
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 12341234
+      MYSQL_DATABASE: test
+    ports:
+      - "3306:3306"
+  web:
+    build:
+      context: ../
+      dockerfile: Docker/Dockerfile  # Dockerfile 경로 명시
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../backend:/app
+    depends_on:
+      - db
